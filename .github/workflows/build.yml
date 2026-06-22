@@ -14,7 +14,13 @@ jobs:
         with:
           root_file: lappar.tex
 
-      - uses: actions/upload-artifact@v4
+      - name: Move PDF to pages folder
+        run: |
+          mkdir -p public
+          cp lappar.pdf public/lappar.pdf
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: pdf
-          path: lappar.pdf
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
