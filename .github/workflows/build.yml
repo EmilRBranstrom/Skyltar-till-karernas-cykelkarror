@@ -1,0 +1,20 @@
+name: Build PDF
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: xu-cheng/latex-action@v3
+        with:
+          root_file: lappar.tex
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pdf
+          path: lappar.pdf
